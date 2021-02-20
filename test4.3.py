@@ -1,39 +1,23 @@
 import datetime
-name = [] 
-score = [] 
-times = [] 
-hit = []
-def time_a():
-    timeis = time.localtime()
-    x = time.strftime('%d %N %Y, %H:%M:%S', timeis)
-    print(x)
-
-amout = int(input('กรุณาพิมพ์จำนวนผู้ซ้อมยิงปืน: '))
-for i  in range(amout):
-    print("ป้อนข้อมูลคนที่",1+i)
-    name_ = input("ชื่อผู้ซ้อม: ")
-    score_ = float(input("คะแนน: "))
-    time_ = float(input("ระยะเวลาที่ใช้: "))
-    name.append(name_)
-    score.append(score_)
-    times.append(time_)
-    hit.append(score_/time_)
-for i  in range(amout):
-    j = i 
-    for j in range(amout):
-        if hit[i] > hit[j]:
-            a, b, c, d = hit[i], name[i], score[i], times[i]
-            hit[i], name[i], score[i], times[i] = hit[j], name[j], score[j], times[j]
-            hit[j], name[j], score[j], times[j] = a, b, c, d
-timeis = time.localtime()
-a = time.strftime('%A', timeis)
-b = time.strftime('%Y',timeis)
-print("Shotgun" +a+ "Training",b,"\nCondition: 1")
-time_a()
-print('-'*100)
-print("{0: -<6}{1: -<6}{2: -<8}{3: -<17}{4: -<12}{5: -<15}{6}".format("NO.","PTS","TIME","COMPETITOR#Name","HIT FACTOR","STATE POINTS","STATE PERCENT"))
-print("-"*100)
-for i in range(amout):
-    stage_point = (hit[i]/hit[0])*50
-    stage_percent = (stage_point/(hit[i]/hit[0])*50)*100
-    print("{0: <16}{1: <6}{2: <8}{3: <17}{4: <12}{5: <15}{6}".format(1+i, int(score[i]), int(time[i]), name[i], "%.4f"%hit[i], "%.4f"%stage_point, "%.2f"%stage_percent))
+name,pts,time,hit=[],[],[],[]
+num =int(input('Enter number of Competitor     : '))
+for i in range(num):
+    print(i+1,'of Comprtitor')
+    regname =input('Name of Competitor             : ')
+    regpts =int(input('Enter your PTS                 : '))
+    regtime =float(input('Enter your time                : '))
+    name.insert(i,regname),pts.insert(i,regpts),time.insert(i,regtime),hit.insert(i,regpts/regtime)
+for i in range(num):
+    j = i
+    for j in range(num):
+        if pts[i] > pts[j]:
+            a,b,c,d = hit[i],name[i],pts[i],time[i]
+            hit[i],name[i],pts[i],time[i]=hit[j],name[j],pts[j],time[j]
+            hit[j],name[j],pts[j],time[j]=a,b,c,d
+date = datetime.datetime.now()
+datenew = date.strftime('%G-%m-%d %H:%M:%S')
+print('\nShotgun',date.strftime('%A'),'Training',date.strftime('%Y'))
+print(datenew)
+print('-'*110+'\n{0:-<15}{1:-<15}{2:-<15}{3:-<20}{4:-<15}{5:-<15}{6:-<15}'.format('No.','PTS','TIME','COMPETITOR','HIT FACTOR','STATE POINTS','STATE PERCENT\n'+'-'*110))
+for i in range(num):
+    print('{0: <15}{1: <15}{2: <15}{3: <20}{4: <15}{5: <15}{6: <1}'.format(i+1,pts[i],time[i],name[i],'%.4f'%hit[i],'%.4f'%float(hit[i]/hit[0]*50),'%.4f'%float((hit[i]/hit[0]*50)/(hit[0]/hit[0]*50)*100)))
